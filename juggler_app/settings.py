@@ -122,6 +122,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# staticファイルを配置するパスを指定する。
+STATICFILES_DIRS = [                  # <-- ここから
+    os.path.join(BASE_DIR, 'static'),
+]  
 
 
 # ログイン後トップページにリダイレクト

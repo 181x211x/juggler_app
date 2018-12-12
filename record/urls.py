@@ -16,6 +16,7 @@ urlpatterns = [
     path('templates/', views.top,name='top'),
     path('login/', auth_views.LoginView.as_view(template_name='record/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('create/', views.record_forms,name='record_forms'),
 
 ]
 

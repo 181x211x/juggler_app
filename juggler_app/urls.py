@@ -27,7 +27,9 @@ urlpatterns = [
     path('api/', include(record_router.urls)),
     path('record/', include('record.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('top/', include('record.urls')),
+    url(r'^top/', include(('record.urls', 'top'),)),
+
+
 
 
 ]
