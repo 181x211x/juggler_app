@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>ユーザー登録</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <!-- jQuery読み込み -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Bootstrap core JS -->
+  <link rel="stylesheet" href="{% static 'js/bootstrap.min.js' %}">
+</head>
+
+<body>
+{% block content %}
+{# signup処理部分 #}
+<form method="post">
+{% csrf_token %}
+<table>
+<tr>
+    <td>{{ form.username.label_tag }}</td>
+    <td>{{ form.username }}</td>
+</tr>
+<tr>
+    <td>{{ form.email.label_tag }}</td>
+    <td>{{ form.email }}</td>
+</tr>
+<tr>
+    <td>{{ form.password1.label_tag }}</td>
+    <td>{{ form.password1 }}</td>
+</tr>
+<tr>
+    <td>{{ form.password2.label_tag }}</td>
+    <td>{{ form.password2 }}</td>
+</tr>
+</table>
+
+<input type="submit" value="login" />
+
+{# エラーメッセージを表示 #}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+     {% endfor %}
+{% endif %}
+</form>
+
+{% endblock %}
+</body>
+</html>

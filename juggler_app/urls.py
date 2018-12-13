@@ -25,7 +25,7 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(record_router.urls)),
-    path('record/', include('record.urls')),
+    url(r'^record/', include(('record.urls', 'record'),)),
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^top/', include(('record.urls', 'top'),)),
 

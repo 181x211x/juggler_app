@@ -125,7 +125,7 @@ STATIC_URL = '/static/'
 # staticファイルを配置するパスを指定する。
 STATICFILES_DIRS = [                  # <-- ここから
     os.path.join(BASE_DIR, 'static'),
-]  
+]
 
 
 # ログイン後トップページにリダイレクト

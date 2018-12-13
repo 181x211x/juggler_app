@@ -1,0 +1,76 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>みんなの記録一覧</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- jQuery読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Bootstrap core JS -->
+    <link rel="stylesheet" href="{% static 'js/bootstrap.min.js' %}">
+
+  </head>
+
+  <body>
+
+
+
+    {% if user.is_authenticated %}
+    <h1>みんなの記録簿一覧</h1>
+    {% else %}
+    <p>ログインしていません</p>
+    {% endif %}
+      <a href="{% url 'top:top' %}">TOP</a><br>
+      <a href="{% url 'top:record_forms' %}">記録する</a><br>
+      <a href="{% url 'top:record_forms' %}">記録の編集</a><br>
+      <a href="{% url 'top:record_forms' %}">成績・グラフ・順位</a><br>
+      <a href="{% url 'top:record_forms' %}">みんなの記録簿一覧</a><br>
+
+
+
+    {% block body %}
+  <form method="post" action="">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>日時</th>
+          <th>名前</th>
+          <th>道具</th>
+          <th>個数</th>
+          <th>技</th>
+          <th>回数</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in records %}
+          <tr>
+            <td>{{ record.date }}</td>
+            <td>{{ record.name }}</td>
+            <td>{{ record.tool }}</td>
+            <td>{{ record.num }}</td>
+            <td>{{ record.skill }}</td>
+            <td>{{ record.count }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </form>
+{% endblock %}
+
+
+
+
+
+    <a class="btn btn-link" href="{% url 'logout' %}">logout</a>
+
+
+  </body>
+</html>
