@@ -20,6 +20,7 @@ urlpatterns = [
     path('create/', views.record_forms,name='record_forms'),
     path('signup/', SignUp.as_view(template_name='record/signup.html'), name='signup'),
     path('all_record/', views.all_record,name='all_record'),
+    path('result/', views.result,name='result'),
 
 ]
 

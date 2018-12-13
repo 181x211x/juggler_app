@@ -3,6 +3,10 @@ from django.contrib.auth.forms import UserCreationForm
 from datetime import datetime
 
 
+EMPTY_CHOICES = (
+    ('全ての道具', '全ての道具'),
+)
+
 TOOL_CHOICES = (
     ('ボール', 'ボール'),
     ('クラブ', 'クラブ'),
@@ -19,6 +23,25 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         fields = ('username', 'email', 'password1', 'password2')
+
+
+
+class Result(forms.Form):
+
+    tool = forms.ChoiceField(
+        label='道具',
+        widget=forms.Select,
+        choices=EMPTY_CHOICES + TOOL_CHOICES,
+        required=False,
+    )
+
+    skill = forms.CharField(
+        label='技',
+        max_length=30,
+        required=False,
+        widget=forms.TextInput()
+    )
+
 
 
 class RecordForm(forms.Form):
@@ -38,7 +61,7 @@ class RecordForm(forms.Form):
         max_length=128,
         required=True,
         widget=forms.TextInput(),
-        
+
     )
 
     tool = forms.ChoiceField(

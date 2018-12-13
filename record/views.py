@@ -74,3 +74,32 @@ def all_record(request):
         'records': Record.objects.all(),
     }
     return render(request,'record/all_record.html',record)
+
+def result(request):
+    form = forms.Result(request.POST or None)
+    if form.is_valid():
+        if form.cleaned_data['tool'] == "全ての道具" and form.cleaned_data['skill'] == "":
+            record = {
+                'records': Record.objects.all().filter(name__contains=request.user.username),
+                'form': forms.Result(),
+                }
+        elif form.cleaned_data['tool'] != "全ての道具" or form.cleaned_data['skill'] == "":
+            record = {
+                'records': Record.objects.all().filter(tool__contains=form.cleaned_data['tool'], name__contains=request.user.username),
+                'form': forms.Result(),
+            }
+        elif form.cleaned_data['tool'] == "全ての道具" or form.cleaned_data['skill'] != "":
+            record = {
+                'records': Record.objects.all().filter(skill__contains=form.cleaned_data['skill'], name__contains=request.user.username),
+                'form': forms.Result(),
+            }
+        else:
+            record = {
+                'records': Record.objects.all().filter(tool__contains=form.cleaned_data['tool'],skill__contains=form.cleaned_data['skill'], name__contains=request.user.username),
+                'form': forms.Result(),
+            }
+        return render(request,'record/result.html',record)
+    d = {
+        'form': forms.Result(),
+    }
+    return render(request, 'record/result.html', d)
