@@ -10,18 +10,34 @@
     <title>記録</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> -->
     <!-- jQuery読み込み -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Bootstrap core JS -->
-    <link rel="stylesheet" href="{% static 'js/bootstrap.min.js' %}">
+    <!-- <link rel="stylesheet" href="{% static 'js/bootstrap.min.js' %}"> -->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
   </head>
 
   <body>
 
+    <div class="title">
+    {% if user.is_authenticated %}
     <h1>記録する</h1>
+    {% else %}
+    <p>ログインしていません</p>
+    {% endif %}
+  </div>
 
+    <ul class="topnav">
+    	<li><a class="active" href="{% url 'top:top' %}">Top</a></li>
+    	<li><a href="{% url 'top:record_forms' %}">記録する</a></li>
+    	<li><a href="{% url 'top:result' %}">記録を見る</a></li>
+      <li><a href="{% url 'top:rank' %}">ランキング</a></li>
+      <li><a href="{% url 'top:all_record' %}">みんなの記録一覧</a></li>
+    	<li class="right"><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
 
 
 
@@ -64,10 +80,6 @@
   </form>
 
 
-
-
-    <a href="{% url 'top:top' %}">Top</a><br>
-    <a class="btn btn-link" href="{% url 'logout' %}">logout</a>
 
 
   </body>

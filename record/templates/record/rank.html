@@ -7,32 +7,32 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>みんなの記録一覧</title>
+    <title>ランキング</title>
 
     <!-- Bootstrap core CSS -->
-    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <!-- jQuery読み込み -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Bootstrap core JS -->
-    <!-- <link rel="stylesheet" href="{% static 'js/bootstrap.min.js' %}"> -->
-    <!-- 作ったcss -->
+    <link rel="stylesheet" href="{% static 'js/bootstrap.min.js' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
   </head>
 
   <body>
 
+
+
     <div class="title">
     {% if user.is_authenticated %}
-    <h1>みんなの記録一覧</h1>
+    <h1>ランキング</h1>
     {% else %}
     <p>ログインしていません</p>
     {% endif %}
-    </div>
-
-
-
-
+  </div>
     <ul class="topnav">
     	<li><a class="active" href="{% url 'top:top' %}">Top</a></li>
     	<li><a href="{% url 'top:record_forms' %}">記録する</a></li>
@@ -45,22 +45,50 @@
 
 
 
+      <div class="serch">
+      <form method="POST" action="">
+      {% csrf_token %}
 
-    <table border="1">
-      <thead>
-        <tr>
-          <th>日時</th>
-          <th>名前</th>
-          <th>道具</th>
-          <th>個数</th>
-          <th>技</th>
-          <th>回数</th>
 
-        </tr>
-      </thead>
-      <tbody>
-        {% for record in records %}
+
+      {{ form.tool.label }}：
+      {{ form.tool }}
+
+
+      {{ form.num.label }}：
+      {{ form.num }}
+
+
+      {{ form.skill.label }}：
+      {{ form.skill }}
+
+
+
+
+        <input type="submit" value="検索">
+      </form>
+
+      </div>
+      <hr>
+      {% block body %}
+      <table border="1">
+        <thead>
           <tr>
+            <th>順位</th>
+            <th>日時</th>
+            <th>名前</th>
+            <th>道具</th>
+            <th>個数</th>
+            <th>技</th>
+            <th>回数</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for record in records %}
+          <tr>
+            <td>{{ forloop.counter }}位</td>
             <td>{{ record.date }}</td>
             <td>{{ record.name }}</td>
             <td>{{ record.tool }}</td>
@@ -68,9 +96,11 @@
             <td>{{ record.skill }}</td>
             <td>{{ record.count }}</td>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+          {% endfor %}
+        </tbody>
+      </table>
+  {% endblock %}
+
 
 
 

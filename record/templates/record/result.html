@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>成績</title>
+    <title>記録一覧</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -16,43 +16,58 @@
     <!-- Bootstrap core JS -->
     <link rel="stylesheet" href="{% static 'js/bootstrap.min.js' %}">
 
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
   </head>
 
   <body>
 
 
 
+    <div class="title">
     {% if user.is_authenticated %}
-    <h1>成績</h1>
+    <h1>記録をみる</h1>
     {% else %}
     <p>ログインしていません</p>
     {% endif %}
-      <a href="{% url 'top:top' %}">TOP</a><br>
-      <a href="{% url 'top:record_forms' %}">記録する</a><br>
-      <a href="{% url 'top:record_forms' %}">記録の編集</a><br>
-      <a href="{% url 'top:result' %}">成績・グラフ・順位</a><br>
-      <a href="{% url 'top:all_record' %}">みんなの記録簿一覧</a><br>
+  </div>
+    <ul class="topnav">
+    	<li><a class="active" href="{% url 'top:top' %}">Top</a></li>
+    	<li><a href="{% url 'top:record_forms' %}">記録する</a></li>
+    	<li><a href="{% url 'top:result' %}">記録を見る</a></li>
+      <li><a href="{% url 'top:rank' %}">ランキング</a></li>
+      <li><a href="{% url 'top:all_record' %}">みんなの記録一覧</a></li>
+    	<li class="right"><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
 
 
 
-      <form method="POST" action="">
-      {% csrf_token %}
+<div class="serch">
+
+  <form method="POST" action="">
+    {% csrf_token %}
 
 
 
-      {{ form.tool.label }}：
-      {{ form.tool }}
+    {{ form.tool.label }}：
+    {{ form.tool }}
+
+
+    {{ form.skill.label }}：
+    {{ form.skill }}
+
+    <input type="submit" value="検索">
+  </form>
+</div>
+
+
+
       <hr>
 
-      {{ form.skill.label }}：
-      {{ form.skill }}
-      <hr>
-
-        <input type="submit" value="検索">
-      </form>
 
       {% block body %}
     <form method="post" action="">
+      {% csrf_token %}
       <table border="1">
         <thead>
           <tr>
@@ -62,6 +77,7 @@
             <th>個数</th>
             <th>技</th>
             <th>回数</th>
+            <th>  <button type="submit">削除</button></th>
 
           </tr>
         </thead>
@@ -74,20 +90,18 @@
               <td>{{ record.num }}</td>
               <td>{{ record.skill }}</td>
               <td>{{ record.count }}</td>
+              <!-- <td>{{ record.DELETE }}</td> -->
+              <td><input type="checkbox" name="delete" value="{{ record.pk }}"></td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
+
     </form>
   {% endblock %}
 
 
 
-
-
-
-
-    <a class="btn btn-link" href="{% url 'logout' %}">logout</a>
 
 
   </body>

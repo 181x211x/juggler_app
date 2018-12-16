@@ -43,6 +43,30 @@ class Result(forms.Form):
     )
 
 
+class Rank(forms.Form):
+
+    tool = forms.ChoiceField(
+        label='道具',
+        widget=forms.Select,
+        choices=TOOL_CHOICES,
+        required=True,
+    )
+
+    num = forms.IntegerField(
+        label='個数',
+        min_value=1,
+        max_value=20,
+        required=True,
+    )
+
+    skill = forms.CharField(
+        label='技',
+        max_length=30,
+        required=True,
+        widget=forms.TextInput()
+    )
+
+
 
 class RecordForm(forms.Form):
 
