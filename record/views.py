@@ -40,7 +40,8 @@ def home(request):
 
 def top(request):
     record = {
-        'records': Record.objects.all().order_by('-date'),
+        'records': Record.objects.all().order_by('-date')[:3],
+        'all_records': Record.objects.all().order_by('-date')[:5],
     }
     return render(request,'record/top.html',record)
 
@@ -138,7 +139,6 @@ def rank(request):
         record = {
                 'records': Record.objects.all().filter(tool__contains=form.cleaned_data['tool'],skill__contains=form.cleaned_data['skill'],num__contains=form.cleaned_data['num'] ).order_by('-count'),
                 'form': forms.Rank(),
-                'rank': range(100),
         }
         return render(request,'record/rank.html',record)
 

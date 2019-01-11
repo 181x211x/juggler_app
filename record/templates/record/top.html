@@ -42,6 +42,67 @@
     </ul>
 
 
+<h2>最近の記録</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>日時</th>
+      <th>名前</th>
+      <th>道具</th>
+      <th>個数</th>
+      <th>技</th>
+      <th>回数</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for record in records %}
+      <tr>
+        <td>{{ record.date }}</td>
+        <td>{{ record.name }}</td>
+        <td>{{ record.tool }}</td>
+        <td>{{ record.num }}</td>
+        <td>{{ record.skill }}</td>
+        <td>{{ record.count }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+<h2>最近のみんなの記録簿</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>日時</th>
+      <th>名前</th>
+      <th>道具</th>
+      <th>個数</th>
+      <th>技</th>
+      <th>回数</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for record in all_records %}
+      <tr>
+        <td>{{ record.date }}</td>
+        <td>{{ record.name }}</td>
+        <td>{{ record.tool }}</td>
+        <td>{{ record.num }}</td>
+        <td>{{ record.skill }}</td>
+        <td>{{ record.count }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+<h2>最新のランキング</h2>
+
+
 
   </body>
 </html>

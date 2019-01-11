@@ -87,7 +87,8 @@
         </thead>
         <tbody>
           {% for record in records %}
-          <tr>
+            {% if record.name  == user.get_username %}
+            <tr class="user_rank">
             <td>{{ forloop.counter }}位</td>
             <td>{{ record.date }}</td>
             <td>{{ record.name }}</td>
@@ -95,7 +96,19 @@
             <td>{{ record.num }}</td>
             <td>{{ record.skill }}</td>
             <td>{{ record.count }}</td>
-          </tr>
+            </tr>
+            {% else %}
+            <tr>
+            <td>{{ forloop.counter }}位</td>
+            <td>{{ record.date }}</td>
+            <td>{{ record.name }}</td>
+            <td>{{ record.tool }}</td>
+            <td>{{ record.num }}</td>
+            <td>{{ record.skill }}</td>
+            <td>{{ record.count }}</td>
+            </tr>
+            {% endif %}
+
           {% endfor %}
         </tbody>
       </table>
