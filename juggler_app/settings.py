@@ -132,3 +132,15 @@ STATICFILES_DIRS = [                  # <-- ここから
 LOGIN_REDIRECT_URL = '/top/templates/'
 # ログアウト後のURLをセット
 LOGOUT_REDIRECT_URL = '/record/login/'
+
+
+DEBUG = False
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
+if not DEBUG:
+    import django_heroku
+    django_heroku.settings(locals())
