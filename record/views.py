@@ -54,7 +54,7 @@ def record_forms(request):
     }
     if form.is_valid():
         models.Record.objects.create(**form.cleaned_data)
-        return redirect('http://localhost:8000/top/templates')
+        return redirect('/record/templates')
 
     return render(request, 'record/create.html', d)
 
@@ -70,7 +70,7 @@ class SignUp(CreateView):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('http://localhost:8000/top/templates')
+            return redirect('/record/templates')
         return render(request, 'record/signup.html', {'form': form})
 
 
